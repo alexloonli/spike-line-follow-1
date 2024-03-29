@@ -1,0 +1,18 @@
+from hub import light_matrix
+import runloop
+import motor_pair
+import color_sensor
+import math
+import time
+from hub import port
+
+
+async def main():
+    # write your code here
+    await light_matrix.write ("Hi!")
+    motor_pair.pair(motor_pair.PAIR_1,port.C,port.D)
+    while True:
+        motor_pair.move(motor_pair.PAIR_1,(math.floor(-3/5)*color_sensor.reflection(port.B)+30),velocity=280)
+    motor_pair.stop (motor_pair. PAIR_1)
+
+runloop.run(main())
